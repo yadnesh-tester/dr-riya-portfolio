@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Riya Kandge-Khedkar | Aesthetic Dentist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose: #b8847c;
+            --rose-dark: #a06b63;
+            --rose-deeper: #8c5349;
+            --rose-light: #d4a59e;
+            --blush: #f5e1da;
+            --blush-light: #faeee9;
+            --blush-pale: #fdf5f2;
+            --cream: #fef9f6;
+            --gold: #c8a87c;
+            --gold-light: #dfc4a0;
+            --gold-dark: #a08050;
+            --text-dark: #3d2b22;
+            --text-medium: #6b5044;
+            --text-light: #9a8478;
+            --pink-shimmer: #f0d0c8;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --glass: rgba(255,255,255,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           DENTAL-THEMED CREATIVE NAV
+           ============================================ */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 0; transition: all 0.5s cubic-bezier(.4,0,.2,1);
+        }
+        nav.scrolled {
+            background: rgba(61, 43, 34, 0.92);
+            backdrop-filter: blur(24px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px;
+        }
+
+        /* Tooth Logo */
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none;
+        }
+        .tooth-logo {
+            width: 38px; height: 38px; position: relative;
+            animation: toothFloat 3s ease-in-out infinite;
+        }
+        .tooth-logo svg { width: 100%; height: 100%; }
+        @keyframes toothFloat {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(2deg); }
+        }
+        .nav-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem; font-weight: 500;
+            transition: color 0.4s;
+        }
+        .nav-brand .first { color: var(--rose-dark); }
+        .nav-brand .last { font-style: italic; font-weight: 300; color: var(--text-medium); }
+        nav.scrolled .nav-brand .first { color: var(--gold-light); }
+        nav.scrolled .nav-brand .last { color: rgba(255,255,255,0.5); }
+
+        /* Dental-themed menu items */
+        .nav-menu { display: flex; align-items: center; gap: 6px; list-style: none; }
+        .nav-menu li { position: relative; }
+        .nav-menu a {
+            display: flex; align-items: center; gap: 7px;
+            text-decoration: none; padding: 10px 16px;
+            font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-medium); transition: all 0.3s;
+            border-radius: 25px; position: relative; overflow: hidden;
+        }
+        .nav-menu a .menu-icon {
+            width: 16px; height: 16px; opacity: 0.5; transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .nav-menu a::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--blush), var(--pink-shimmer));
+            border-radius: 25px; opacity: 0; transition: opacity 0.3s;
+            z-index: -1;
+        }
+        .nav-menu a:hover::before { opacity: 1; }
+        .nav-menu a:hover { color: var(--rose-dark); }
+        .nav-menu a:hover .menu-icon { opacity: 1; transform: scale(1.15); }
+
+        nav.scrolled .nav-menu a { color: rgba(255,255,255,0.6); }
+        nav.scrolled .nav-menu a:hover { color: #fff; }
+        nav.scrolled .nav-menu a::before {
+            background: linear-gradient(135deg, rgba(184,132,124,0.3), rgba(200,168,124,0.2));
+        }
+
+        /* Active pill indicator */
+        .nav-menu a.active {
+            color: var(--rose-dark); font-weight: 700;
+        }
+        .nav-menu a.active::before { opacity: 1; }
+        nav.scrolled .nav-menu a.active { color: #fff; }
+
+        /* Burger */
+        .burger {
+            display: none; flex-direction: column; gap: 6px;
+            cursor: pointer; background: none; border: none; padding: 8px;
+            z-index: 1001;
+        }
+        .burger span {
+            width: 26px; height: 2px; background: var(--rose-dark);
+            transition: all 0.3s; border-radius: 2px;
+        }
+        nav.scrolled .burger span { background: var(--gold-light); }
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            background: linear-gradient(155deg, var(--cream) 0%, var(--blush-light) 30%, var(--blush) 60%, var(--pink-shimmer) 100%);
+        }
+        .hero-bg-shapes {
+            position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+        }
+        .hero-bg-shapes .shape {
+            position: absolute; border-radius: 50%; opacity: 0.06;
+            background: var(--gold);
+        }
+        .hero-bg-shapes .shape:nth-child(1) { width: 600px; height: 600px; top: -200px; right: -100px; }
+        .hero-bg-shapes .shape:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; background: var(--rose); }
+        .hero-bg-shapes .shape:nth-child(3) { width: 200px; height: 200px; top: 40%; left: 30%; background: var(--rose-light); }
+
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 180px; background: linear-gradient(to top, var(--cream), transparent); z-index: 2;
+        }
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto; padding: 120px 30px 80px;
+            display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px;
+            align-items: center; position: relative; z-index: 3; width: 100%;
+        }
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+            letter-spacing: 3px; text-transform: uppercase; color: var(--rose);
+            margin-bottom: 20px; padding: 8px 20px 8px 14px;
+            background: rgba(255,255,255,0.5); border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(184,132,124,0.15);
+        }
+        .hero-tag svg { width: 16px; height: 16px; }
+        .hero-title {
+            font-family: 'Playfair Display', serif; font-size: 3.2rem;
+            font-weight: 400; line-height: 1.15; margin-bottom: 10px;
+        }
+        .hero-title em { font-style: italic; color: var(--rose-dark); }
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+            font-weight: 300; font-style: italic; color: var(--text-medium);
+            margin-bottom: 22px;
+        }
+        .hero-sub {
+            font-size: 0.95rem; color: var(--text-light); line-height: 1.8;
+            font-weight: 300; margin-bottom: 28px; max-width: 480px;
+        }
+        .hero-badges {
+            display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 18px; border-radius: 30px;
+            background: rgba(255,255,255,0.55); backdrop-filter: blur(8px);
+            border: 1px solid rgba(184,132,124,0.12);
+            font-size: 0.78rem; color: var(--text-medium); font-weight: 400;
+        }
+        .hero-badge svg { width: 14px; height: 14px; color: var(--rose); }
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 36px;
+            background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+            color: #fff; text-decoration: none; font-size: 0.78rem;
+            letter-spacing: 2px; text-transform: uppercase; border-radius: 50px;
+            transition: all 0.4s; box-shadow: 0 6px 24px rgba(184, 132, 124, 0.35);
+            position: relative; overflow: hidden;
+        }
+        .btn::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--rose), var(--rose-light));
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(184, 132, 124, 0.45);
+        }
+        .btn span { position: relative; z-index: 1; }
+        .btn svg { width: 16px; height: 16px; position: relative; z-index: 1; }
+
+        /* Hero image */
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-visual-img {
+            width: 100%; max-width: 380px; aspect-ratio: 3/4;
+            border-radius: 30% 70% 55% 45% / 55% 40% 60% 45%;
+            object-fit: cover;
+            box-shadow: 0 30px 70px rgba(184, 132, 124, 0.2);
+            position: relative; z-index: 2;
+        }
+        .hero-ring {
+            position: absolute; border: 1.5px solid rgba(200, 168, 124, 0.15);
+            border-radius: 30% 70% 55% 45% / 55% 40% 60% 45%;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            animation: ringPulse 5s ease-in-out infinite;
+        }
+        .hero-ring:nth-child(2) { width: 108%; height: 108%; }
+        .hero-ring:nth-child(3) { width: 118%; height: 118%; animation-delay: 1.5s; border-style: dashed; }
+        @keyframes ringPulse {
+            0%,100% { opacity: .2; transform: translate(-50%,-50%) scale(1); }
+            50% { opacity: .5; transform: translate(-50%,-50%) scale(1.02); }
+        }
+        /* Floating dental elements around hero image */
+        .hero-float {
+            position: absolute; z-index: 3;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+            border: 1px solid rgba(184,132,124,0.12);
+            border-radius: 16px; padding: 12px 16px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+        .hero-float svg { width: 20px; height: 20px; color: var(--rose); flex-shrink: 0; }
+        .hero-float span {
+            font-size: 0.72rem; font-weight: 700; color: var(--text-dark);
+            letter-spacing: 0.5px; line-height: 1.3;
+        }
+        .hero-float span small { display: block; font-weight: 300; color: var(--text-light); font-size: 0.65rem; }
+        .hero-float-1 { top: 15%; right: -10%; animation-delay: 0s; }
+        .hero-float-2 { bottom: 20%; left: -8%; animation-delay: 2s; }
+        @keyframes floatBadge {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Sparkles */
+        .sparkle-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .sparkle {
+            position: absolute; width: 3px; height: 3px;
+            background: var(--gold-light); border-radius: 50%;
+            animation: sparkAnim 3s ease-in-out infinite;
+        }
+        @keyframes sparkAnim {
+            0%,100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ============================================
+           SECTION COMMONS
+           ============================================ */
+        .section { padding: 110px 0; position: relative; }
+        .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        .sec-label {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.9rem;
+            letter-spacing: 3px; text-transform: uppercase; color: var(--rose);
+            text-align: center; margin-bottom: 10px;
+        }
+        .sec-title {
+            font-family: 'Playfair Display', serif; font-size: 2.4rem;
+            font-weight: 400; text-align: center; color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+        .sec-sub {
+            text-align: center; color: var(--text-light); font-size: 0.92rem;
+            font-weight: 300; max-width: 520px; margin: 0 auto 55px; line-height: 1.7;
+        }
+        .sep {
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pink-shimmer), transparent);
+        }
+
+        /* ============================================
+           ABOUT - RICH LAYOUT
+           ============================================ */
+        .about { background: var(--cream); }
+        .about-grid {
+            display: grid; grid-template-columns: 0.9fr 1.1fr;
+            gap: 70px; align-items: center;
+        }
+        .about-photo-wrap { position: relative; }
+        .about-photo-frame {
+            width: 100%; aspect-ratio: 3/4;
+            background: linear-gradient(145deg, var(--blush-light), var(--blush));
+            border-radius: 24px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(184, 132, 124, 0.12);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .about-placeholder {
+            text-align: center; color: var(--text-light); padding: 40px;
+        }
+        .about-placeholder svg { width: 80px; height: 80px; opacity: 0.3; margin-bottom: 14px; }
+        .about-placeholder p {
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic;
+        }
+        .about-placeholder small { display: block; margin-top: 8px; font-size: 0.72rem; opacity: 0.5; font-style: normal; }
+        .about-decor {
+            position: absolute; bottom: -14px; right: -14px;
+            width: 100px; height: 100px; border: 1.5px solid var(--rose-light);
+            border-radius: 24px; opacity: 0.25; z-index: -1;
+        }
+        .about-decor-2 {
+            position: absolute; top: -14px; left: -14px;
+            width: 80px; height: 80px; border: 1px dashed var(--gold);
+            border-radius: 20px; opacity: 0.2; z-index: -1;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem;
+            font-weight: 400; color: var(--text-dark);
+            margin-bottom: 24px; line-height: 1.3;
+        }
+        .about-content h3 em { font-style: italic; color: var(--rose-dark); }
+        .about-content p {
+            color: var(--text-medium); line-height: 1.85;
+            font-weight: 300; margin-bottom: 16px; font-size: 0.93rem;
+        }
+
+        /* Education Timeline */
+        .edu-timeline {
+            margin-top: 35px; padding-top: 30px;
+            border-top: 1px solid rgba(184, 132, 124, 0.15);
+        }
+        .edu-timeline h4 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+            color: var(--rose-dark); margin-bottom: 18px; letter-spacing: 1px;
+        }
+        .edu-item {
+            display: flex; gap: 16px; margin-bottom: 16px;
+            padding: 14px 18px; border-radius: 14px;
+            background: rgba(245, 225, 218, 0.3);
+            border: 1px solid rgba(184, 132, 124, 0.08);
+            transition: all 0.3s;
+        }
+        .edu-item:hover {
+            background: rgba(245, 225, 218, 0.5);
+            transform: translateX(4px);
+        }
+        .edu-dot {
+            width: 36px; height: 36px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--blush), var(--pink-shimmer));
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        }
+        .edu-dot svg { width: 18px; height: 18px; color: var(--rose-dark); }
+        .edu-info h5 {
+            font-family: 'Playfair Display', serif; font-size: 0.9rem;
+            font-weight: 500; color: var(--text-dark); margin-bottom: 2px;
+        }
+        .edu-info p { font-size: 0.78rem; color: var(--text-light); font-weight: 300; margin: 0; }
+
+        /* ============================================
+           EXPERTISE (not services)
+           ============================================ */
+        .expertise {
+            background: linear-gradient(180deg, var(--blush-pale) 0%, var(--blush-light) 50%, var(--blush-pale) 100%);
+        }
+        .expertise-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .exp-card {
+            background: var(--card-bg); backdrop-filter: blur(12px);
+            border: 1px solid rgba(184, 132, 124, 0.08);
+            border-radius: 22px; padding: 35px 28px;
+            transition: all 0.5s cubic-bezier(.4,0,.2,1);
+            position: relative; overflow: hidden;
+        }
+        .exp-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--gold));
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .exp-card::after {
+            content: ''; position: absolute; bottom: -50px; right: -50px;
+            width: 150px; height: 150px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(184,132,124,0.06), transparent);
+            transition: all 0.5s;
+        }
+        .exp-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 55px rgba(184, 132, 124, 0.12);
+            border-color: rgba(184, 132, 124, 0.2);
+        }
+        .exp-card:hover::before { opacity: 1; }
+        .exp-card:hover::after { bottom: -30px; right: -30px; }
+        .exp-icon {
+            width: 58px; height: 58px; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--blush), var(--pink-shimmer));
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 1;
+        }
+        .exp-icon svg { width: 28px; height: 28px; color: var(--rose-dark); }
+        .exp-card h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.1rem;
+            font-weight: 500; color: var(--text-dark); margin-bottom: 10px;
+            line-height: 1.3; position: relative; z-index: 1;
+        }
+        .exp-card p {
+            font-size: 0.85rem; color: var(--text-light); line-height: 1.7;
+            font-weight: 300; position: relative; z-index: 1;
+        }
+        .exp-tag {
+            display: inline-block; margin-top: 14px; padding: 4px 12px;
+            font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--rose-dark); background: rgba(184,132,124,0.1);
+            border-radius: 20px; position: relative; z-index: 1;
+        }
+
+        /* ============================================
+           BEFORE / AFTER SLIDER
+           ============================================ */
+        .transforms { background: var(--cream); }
+        .ba-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .ba-item { text-align: center; }
+        .ba-slider {
+            position: relative; width: 100%; aspect-ratio: 4/3;
+            border-radius: 20px; overflow: hidden; cursor: col-resize;
+            box-shadow: 0 20px 50px rgba(184, 132, 124, 0.14);
+            user-select: none; -webkit-user-select: none; touch-action: none;
+            background: var(--blush);
+        }
+        .ba-slider img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; pointer-events: none;
+        }
+        .ba-after { z-index: 1; }
+        .ba-before {
+            z-index: 2; clip-path: inset(0 50% 0 0);
+            filter: sepia(0.4) saturate(0.7) brightness(0.85) hue-rotate(-10deg) contrast(0.95);
+        }
+        .ba-handle {
+            position: absolute; top: 0; bottom: 0; left: 50%;
+            width: 3px; background: #fff; z-index: 10;
+            transform: translateX(-50%);
+            box-shadow: 0 0 12px rgba(0,0,0,0.18);
+        }
+        .ba-handle::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px; height: 46px; background: #fff;
+            border-radius: 50%; box-shadow: 0 3px 16px rgba(0,0,0,0.2);
+        }
+        .ba-arrows {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 11;
+            display: flex; align-items: center; gap: 2px;
+            color: var(--rose); pointer-events: none;
+        }
+        .ba-arrows svg { width: 16px; height: 16px; }
+        .ba-label {
+            position: absolute; bottom: 14px; z-index: 12;
+            font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase;
+            padding: 5px 14px; border-radius: 20px; font-weight: 700;
+        }
+        .ba-label-before { left: 14px; background: rgba(61, 43, 34, 0.78); color: #fff; }
+        .ba-label-after { right: 14px; background: rgba(184, 132, 124, 0.9); color: #fff; }
+        .ba-caption {
+            margin-top: 16px; font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; color: var(--text-medium); font-style: italic;
+        }
+        .ba-hint {
+            text-align: center; margin-bottom: 40px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 0.8rem; color: var(--text-light);
+        }
+        .ba-hint svg { width: 20px; height: 20px; color: var(--rose-light); animation: swipeHint 2s ease-in-out infinite; }
+        @keyframes swipeHint {
+            0%,100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+
+        /* ============================================
+           SMILE GALLERY STRIP
+           ============================================ */
+        .gallery-strip {
+            display: flex; gap: 16px; margin-top: 60px;
+            justify-content: center; flex-wrap: wrap;
+        }
+        .gallery-strip img {
+            width: 160px; height: 160px; object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(184, 132, 124, 0.1);
+            transition: all 0.5s cubic-bezier(.4,0,.2,1);
+            filter: grayscale(0.15);
+        }
+        .gallery-strip img:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(184, 132, 124, 0.2);
+            filter: grayscale(0);
+        }
+
+        /* ============================================
+           APPROACH / PHILOSOPHY
+           ============================================ */
+        .approach {
+            background: linear-gradient(180deg, var(--blush-pale), var(--blush-light), var(--blush-pale));
+        }
+        .approach-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+        }
+        .approach-quote {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.9rem;
+            font-weight: 300; font-style: italic; color: var(--text-medium);
+            line-height: 1.55; margin-bottom: 20px; position: relative;
+            padding-left: 30px;
+        }
+        .approach-quote::before {
+            content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+            width: 3px; border-radius: 3px;
+            background: linear-gradient(to bottom, var(--rose), var(--gold));
+        }
+        .approach-author {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; color: var(--rose-dark); font-style: italic;
+            padding-left: 30px;
+        }
+
+        .approach-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .pillar {
+            padding: 28px 22px; border-radius: 18px;
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border: 1px solid rgba(184,132,124,0.08);
+            transition: all 0.4s; text-align: center;
+        }
+        .pillar:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(184,132,124,0.08);
+        }
+        .pillar-icon {
+            width: 44px; height: 44px; margin: 0 auto 14px;
+            background: linear-gradient(135deg, var(--blush), var(--pink-shimmer));
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        }
+        .pillar-icon svg { width: 22px; height: 22px; color: var(--rose-dark); }
+        .pillar h4 {
+            font-family: 'Playfair Display', serif; font-size: 0.95rem;
+            font-weight: 500; color: var(--text-dark); margin-bottom: 6px;
+        }
+        .pillar p { font-size: 0.76rem; color: var(--text-light); font-weight: 300; line-height: 1.5; }
+
+        /* ============================================
+           STATS COUNTER
+           ============================================ */
+        .stats {
+            background: linear-gradient(135deg, var(--text-dark) 0%, #5a3d32 100%);
+            padding: 60px 0; position: relative; overflow: hidden;
+        }
+        .stats::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .stats-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 30px;
+            display: flex; justify-content: center; gap: 60px;
+            position: relative; z-index: 1;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+            font-family: 'Playfair Display', serif; font-size: 2.8rem;
+            font-weight: 600; color: var(--gold-light);
+            line-height: 1; margin-bottom: 6px;
+        }
+        .stat-label {
+            font-size: 0.72rem; color: rgba(255,255,255,0.45);
+            letter-spacing: 1.5px; text-transform: uppercase;
+        }
+
+        /* ============================================
+           CONTACT
+           ============================================ */
+        .contact { background: var(--cream); }
+        .contact-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+        }
+        .contact-left h3 {
+            font-family: 'Playfair Display', serif; font-size: 2rem;
+            font-weight: 400; margin-bottom: 14px; line-height: 1.3;
+        }
+        .contact-left h3 em { font-style: italic; color: var(--rose-dark); }
+        .contact-left > p {
+            color: var(--text-light); font-size: 0.92rem;
+            font-weight: 300; line-height: 1.7; margin-bottom: 35px;
+        }
+        .c-item {
+            display: flex; align-items: center; gap: 18px; margin-bottom: 22px;
+            padding: 16px 20px; border-radius: 16px;
+            background: rgba(245,225,218,0.25);
+            border: 1px solid rgba(184,132,124,0.06);
+            transition: all 0.3s;
+        }
+        .c-item:hover {
+            background: rgba(245,225,218,0.45);
+            transform: translateX(6px);
+        }
+        .c-icon {
+            width: 48px; height: 48px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--blush), var(--pink-shimmer));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+        }
+        .c-icon svg { width: 22px; height: 22px; color: var(--rose-dark); }
+        .c-text h5 {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+            font-weight: 500; color: var(--text-dark); margin-bottom: 2px;
+        }
+        .c-text a, .c-text p {
+            color: var(--text-medium); font-size: 0.88rem;
+            font-weight: 300; text-decoration: none; transition: color 0.3s;
+        }
+        .c-text a:hover { color: var(--rose-dark); }
+
+        /* QR / Share Card */
+        .share-card {
+            background: linear-gradient(155deg, var(--text-dark), #5a3d32);
+            border-radius: 28px; padding: 45px 40px; text-align: center;
+            position: relative; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(61,43,34,0.2);
+        }
+        .share-card::before {
+            content: ''; position: absolute; top: -50px; right: -50px;
+            width: 200px; height: 200px; border-radius: 50%;
+            background: rgba(184,132,124,0.1);
+        }
+        .share-card h4 {
+            font-family: 'Playfair Display', serif; font-size: 1.4rem;
+            color: var(--gold-light); margin-bottom: 8px; position: relative;
+        }
+        .share-card > p {
+            color: rgba(255,255,255,0.4); font-size: 0.82rem; font-weight: 300;
+            margin-bottom: 28px; position: relative;
+        }
+        .share-card-info {
+            display: flex; flex-direction: column; gap: 12px;
+            align-items: center; position: relative;
+        }
+        .share-card-item {
+            display: flex; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 300;
+        }
+        .share-card-item svg { width: 16px; height: 16px; color: var(--rose-light); }
+        .share-card-item a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+        .share-card-item a:hover { color: var(--gold-light); }
+        .share-card-divider {
+            width: 50px; height: 1px; background: rgba(255,255,255,0.1);
+            margin: 18px auto;
+        }
+        .share-card-location {
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+            font-style: italic; color: rgba(255,255,255,0.35); position: relative;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--text-dark); padding: 50px 0 25px; position: relative;
+        }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+        }
+        .ft-inner { max-width: 1200px; margin: 0 auto; padding: 0 30px; text-align: center; }
+        .ft-logo {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            color: var(--rose-light); margin-bottom: 6px;
+        }
+        .ft-tag {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+            font-style: italic; color: rgba(255,255,255,0.25); margin-bottom: 24px;
+        }
+        .ft-social {
+            display: flex; justify-content: center; gap: 14px; margin-bottom: 28px;
+        }
+        .ft-social a {
+            width: 42px; height: 42px;
+            border: 1px solid rgba(184, 132, 124, 0.25);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s;
+        }
+        .ft-social a:hover { background: var(--rose); border-color: var(--rose); }
+        .ft-social a svg { width: 18px; height: 18px; color: var(--rose-light); transition: color 0.3s; }
+        .ft-social a:hover svg { color: #fff; }
+        .ft-line { width: 100%; height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 20px; }
+        .ft-copy { font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        .fade-up {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.vis { opacity: 1; transform: translateY(0); }
+        .fade-left {
+            opacity: 0; transform: translateX(-30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-left.vis { opacity: 1; transform: translateX(0); }
+        .fade-right {
+            opacity: 0; transform: translateX(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-right.vis { opacity: 1; transform: translateX(0); }
+
+        /* ============================================
+           RESPONSIVE - TABLET
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr; text-align: center;
+                gap: 35px; padding-top: 100px;
+            }
+            .hero-visual { order: -1; }
+            .hero-visual-img { max-width: 280px; }
+            .hero-sub { margin: 0 auto 24px; }
+            .hero-badges { justify-content: center; }
+            .hero-title { font-size: 2.6rem; }
+            .hero-float { display: none; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 45px; }
+            .about-photo-frame { max-width: 350px; margin: 0 auto; }
+
+            .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .ba-grid { grid-template-columns: repeat(2, 1fr); }
+            .ba-grid > .ba-item:nth-child(3) {
+                grid-column: 1 / -1; max-width: 50%; margin: 0 auto;
+            }
+
+            .approach-layout { grid-template-columns: 1fr; gap: 45px; }
+            .approach-quote { font-size: 1.6rem; }
+
+            .stats-inner { gap: 40px; flex-wrap: wrap; }
+
+            .gallery-strip img { width: 140px; height: 140px; }
+
+            .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* ============================================
+           RESPONSIVE - MOBILE
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(61, 43, 34, 0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center; align-items: center;
+                gap: 8px; padding: 20px;
+            }
+            .nav-menu.open { display: flex; }
+            .nav-menu a {
+                color: rgba(255,255,255,0.7); font-size: 0.9rem;
+                padding: 14px 28px;
+            }
+            .nav-menu a .menu-icon { color: var(--rose-light); }
+            .nav-menu a:hover, .nav-menu a.active { color: #fff; }
+            .nav-menu a::before {
+                background: linear-gradient(135deg, rgba(184,132,124,0.2), rgba(200,168,124,0.15));
+            }
+            .burger { display: flex; }
+
+            .hero { min-height: auto; }
+            .hero-inner { padding: 95px 24px 60px; gap: 25px; }
+            .hero-title { font-size: 2rem; }
+            .hero-name { font-size: 1.2rem; }
+            .hero-visual-img { max-width: 220px; }
+            .hero-badge { font-size: 0.7rem; padding: 6px 14px; }
+
+            .section { padding: 75px 0; }
+            .section-inner { padding: 0 24px; }
+            .sec-title { font-size: 1.9rem; }
+
+            .about-grid { gap: 35px; }
+            .edu-item { flex-direction: column; gap: 10px; text-align: center; }
+
+            .expertise-grid { grid-template-columns: 1fr; }
+            .exp-card { padding: 28px 22px; }
+
+            .ba-grid { grid-template-columns: 1fr; gap: 28px; }
+            .ba-grid > .ba-item:nth-child(3) { max-width: 100%; }
+
+            .approach-pillars { grid-template-columns: 1fr; }
+            .approach-quote { font-size: 1.35rem; padding-left: 22px; }
+
+            .stats-inner { gap: 28px; }
+            .stat-num { font-size: 2.2rem; }
+
+            .gallery-strip { gap: 10px; }
+            .gallery-strip img { width: 110px; height: 110px; border-radius: 14px; }
+
+            .contact-layout { gap: 30px; }
+            .share-card { padding: 35px 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.65rem; }
+            .hero-badges { flex-direction: column; align-items: center; }
+            .ba-slider { aspect-ratio: 3/2; }
+            .gallery-strip img { width: 90px; height: 90px; }
+            .stats-inner { flex-direction: column; gap: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV - Dental Themed ===== -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a class="nav-logo" href="#home">
+            <div class="tooth-logo">
+                <svg viewBox="0 0 40 48" fill="none">
+                    <defs>
+                        <linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#c8a87c"/>
+                            <stop offset="100%" stop-color="#b8847c"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 3C12 3 6 9 6 17c0 6 3 10 5 14 1 2 2 5 3 8 .5 1.5 2 2.5 4 2.5s3.5-1 4-2.5c.5-1.5 1-3 1.5-4.5.3-.8.8-1.2 1.5-1.2s1.2.4 1.5 1.2c.5 1.5 1 3 1.5 4.5.5 1.5 2 2.5 4 2.5s3.5-1 4-2.5c1-3 2-6 3-8 2-4 5-8 5-14C44 9 38 3 30 3h-10z" transform="scale(0.75) translate(6.5,2)" stroke="url(#tg)" stroke-width="2" fill="none"/>
+                    <path d="M13 16c3-2 6-1 9 0s6 2 9 0" stroke="url(#tg)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5" transform="translate(-1,0)"/>
+                    <circle cx="14" cy="11" r="1.2" fill="url(#tg)" opacity="0.5"/>
+                    <circle cx="26" cy="10" r="1" fill="url(#tg)" opacity="0.4"/>
+                </svg>
+            </div>
+            <div class="nav-brand">
+                <span class="first">Dr. Riya</span> <span class="last">K.</span>
+            </div>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="active">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                Home
+            </a></li>
+            <li><a href="#about">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+                About
+            </a></li>
+            <li><a href="#expertise">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 2 5 5 5 9c0 3 2 5 3 7 .5 1 1 3 1.5 4.5.3.8 1 1.5 2.5 1.5s2.2-.7 2.5-1.5C15 19 15.5 17 16 16c1-2 3-4 3-7 0-4-3-7-7-7z"/><path d="M9 9h6"/></svg>
+                Expertise
+            </a></li>
+            <li><a href="#transformations">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                Gallery
+            </a></li>
+            <li><a href="#contact">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                Contact
+            </a></li>
+        </ul>
+        <button class="burger" id="burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-bg-shapes">
+        <div class="shape"></div><div class="shape"></div><div class="shape"></div>
+    </div>
+    <div class="sparkle-container" id="sparkleContainer"></div>
+    <div class="hero-inner">
+        <div class="hero-text">
+            <div class="hero-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z"/></svg>
+                Aesthetic & Cosmetic Dentistry
+            </div>
+            <h1 class="hero-title">Crafting Beautiful<br>Smiles with<br><em>Precision & Grace</em></h1>
+            <p class="hero-name">Dr. Riya Kandge-Khedkar</p>
+            <p class="hero-sub">Aesthetic Dentist with advanced training in digital smile design and minimally invasive cosmetic dentistry. Focused on creating natural, balanced results in harmony with your unique facial features.</p>
+            <div class="hero-badges">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>
+                    BDS
+                </div>
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z"/></svg>
+                    Fellowship in Aesthetic Dentistry
+                </div>
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4 8 4v14"/><path d="M9 21v-4h6v4"/></svg>
+                    NIRF #1 Saveetha College
+                </div>
+            </div>
+            <a href="#contact" class="btn">
+                <span>Get in Touch</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+        <div class="hero-visual">
+            <img class="hero-visual-img" src="https://images.pexels.com/photos/3762453/pexels-photo-3762453.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Beautiful confident smile">
+            <div class="hero-ring"></div>
+            <div class="hero-ring"></div>
+            <div class="hero-float hero-float-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 2 5 5 5 9c0 3 2 5 3 7 .5 1 1 3 1.5 4.5.3.8 1 1.5 2.5 1.5s2.2-.7 2.5-1.5C15 19 15.5 17 16 16c1-2 3-4 3-7 0-4-3-7-7-7z"/></svg>
+                <span>Smile Design<small>Digital Planning</small></span>
+            </div>
+            <div class="hero-float hero-float-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>
+                <span>NIRF #1<small>Saveetha Dental</small></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section about" id="about">
+    <div class="sep"></div>
+    <div class="section-inner">
+        <p class="sec-label fade-up">Profile</p>
+        <h2 class="sec-title fade-up">About Dr. Riya</h2>
+        <p class="sec-sub fade-up">Where clinical precision meets artistic vision</p>
+
+        <div class="about-grid">
+            <div class="about-photo-wrap fade-left">
+                <div class="about-photo-frame">
+                    <div class="about-placeholder">
+                        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="35" r="18" stroke="currentColor" stroke-width="1.5"/><path d="M20 85C20 65 35 55 50 55C65 55 80 65 80 85" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                        <p>Dr. Riya's Photo</p>
+                        <small>Replace with professional portrait</small>
+                    </div>
+                </div>
+                <div class="about-decor"></div>
+                <div class="about-decor-2"></div>
+            </div>
+            <div class="about-content fade-right">
+                <h3>Dedicated to Creating <em>Natural, Lasting</em> Smiles</h3>
+                <p>Dr. Riya Kandge-Khedkar is an Aesthetic Dentist with focused training in smile design and contemporary cosmetic dentistry. She completed her BDS and Fellowship in Aesthetic Dentistry (FDS) from Saveetha Dental College, Chennai &mdash; a NIRF-ranked No.1 private dental institution, known for advanced clinical training and research.</p>
+                <p>Her clinical approach is centered around precision, detailed evaluation, and preservation of natural tooth structure, with an emphasis on achieving balanced, natural-looking, and long-lasting aesthetic results.</p>
+                <p>With a strong inclination towards digital smile designing and minimally invasive techniques, she focuses on creating smiles that are in harmony with individual facial features.</p>
+
+                <div class="edu-timeline">
+                    <h4>Education & Training</h4>
+                    <div class="edu-item">
+                        <div class="edu-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg></div>
+                        <div class="edu-info">
+                            <h5>Bachelor of Dental Surgery (BDS)</h5>
+                            <p>Saveetha Dental College, Chennai</p>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z"/></svg></div>
+                        <div class="edu-info">
+                            <h5>Fellowship in Aesthetic Dentistry (FDS)</h5>
+                            <p>Saveetha Dental College, Chennai &mdash; NIRF Ranked #1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EXPERTISE ===== -->
+<section class="section expertise" id="expertise">
+    <div class="sep"></div>
+    <div class="section-inner">
+        <p class="sec-label fade-up">Areas of Knowledge</p>
+        <h2 class="sec-title fade-up">Aesthetic Dentistry Expertise</h2>
+        <p class="sec-sub fade-up">Specialized training across the full spectrum of cosmetic and aesthetic dental procedures</p>
+
+        <div class="expertise-grid">
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 10l3 3 7-7"/></svg>
+                </div>
+                <h3>Digital Smile Design (DSD)</h3>
+                <p>Advanced digital analysis and planning to visualize smile transformations before any treatment begins. Using cutting-edge software for precise, predictable outcomes.</p>
+                <span class="exp-tag">Digital Planning</span>
+            </div>
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a7 7 0 017 7c0 3-2 5.5-3.5 8-.7 1.2-1.2 2.5-1.5 4h-4c-.3-1.5-.8-2.8-1.5-4C7 15.5 5 13 5 10a7 7 0 017-7z"/><path d="M10 22h4"/><path d="M9 10h6"/><path d="M12 7v6"/></svg>
+                </div>
+                <h3>Professional Teeth Whitening</h3>
+                <p>Treatment protocols for yellowing, fluorosis, and intrinsic stains with natural, opalescent results. Both vital and non-vital whitening techniques.</p>
+                <span class="exp-tag">Whitening</span>
+            </div>
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 2 5 5 5 9c0 3 2 5 3 7 .5 1 1 3 1.5 4.5.3.8 1 1.5 2.5 1.5s2.2-.7 2.5-1.5C15 19 15.5 17 16 16c1-2 3-4 3-7 0-4-3-7-7-7z"/><path d="M9 9h6"/></svg>
+                </div>
+                <h3>Veneers & Aesthetic Crowns</h3>
+                <p>E-max and all-ceramic restorations designed to enhance shape, colour, and symmetry. Creating a natural, refined look that complements facial features.</p>
+                <span class="exp-tag">Restorations</span>
+            </div>
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                </div>
+                <h3>Composite Aesthetic Restorations</h3>
+                <p>Advanced tooth-coloured fillings that achieve natural look, strength, and seamless shade matching. Biomimetic approach preserving maximum tooth structure.</p>
+                <span class="exp-tag">Minimally Invasive</span>
+            </div>
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 12c0-3 2-5 5-5s5 2 5 5"/><path d="M5 20c0-3 3-6 7-6s7 3 7 6"/><path d="M12 3v2M4.22 5.22l1.42 1.42M19.78 5.22l-1.42 1.42"/></svg>
+                </div>
+                <h3>Pink Aesthetics (Perio-Aesthetic)</h3>
+                <p>Gum depigmentation, crown lengthening, and smile line correction using laser and surgical techniques for complete smile harmony.</p>
+                <span class="exp-tag">Gum Aesthetics</span>
+            </div>
+            <div class="exp-card fade-up">
+                <div class="exp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3-3 3 3"/></svg>
+                </div>
+                <h3>Complete Smile Makeovers</h3>
+                <p>Comprehensive treatment planning combining multiple aesthetic modalities tailored to individual needs. Full-mouth rehabilitation with cosmetic focus.</p>
+                <span class="exp-tag">Full Makeover</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+    <div class="stats-inner">
+        <div class="stat fade-up">
+            <div class="stat-num" data-count="6">0</div>
+            <div class="stat-label">Areas of Expertise</div>
+        </div>
+        <div class="stat fade-up">
+            <div class="stat-num" data-count="2">0</div>
+            <div class="stat-label">Advanced Degrees</div>
+        </div>
+        <div class="stat fade-up">
+            <div class="stat-num special" data-text="#1">#1</div>
+            <div class="stat-label">NIRF Ranked College</div>
+        </div>
+        <div class="stat fade-up">
+            <div class="stat-num" data-count="100" data-suffix="%">0</div>
+            <div class="stat-label">Passion for Aesthetics</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BEFORE / AFTER ===== -->
+<section class="section transforms" id="transformations">
+    <div class="sep"></div>
+    <div class="section-inner">
+        <p class="sec-label fade-up">See the Difference</p>
+        <h2 class="sec-title fade-up" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:2.5rem;">Before & After Transformations</h2>
+        <div class="ba-hint fade-up">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Drag the slider to reveal the transformation
+        </div>
+
+        <div class="ba-grid">
+            <div class="ba-item fade-up">
+                <div class="ba-slider" data-slider>
+                    <img class="ba-after" src="https://images.pexels.com/photos/3762453/pexels-photo-3762453.jpeg?auto=compress&cs=tinysrgb&w=600" alt="After">
+                    <img class="ba-before" src="https://images.pexels.com/photos/3762453/pexels-photo-3762453.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Before">
+                    <div class="ba-handle" data-handle>
+                        <div class="ba-arrows">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                </div>
+                <p class="ba-caption">Smile Makeover</p>
+            </div>
+            <div class="ba-item fade-up">
+                <div class="ba-slider" data-slider>
+                    <img class="ba-after" src="https://images.pexels.com/photos/3762408/pexels-photo-3762408.jpeg?auto=compress&cs=tinysrgb&w=600" alt="After">
+                    <img class="ba-before" src="https://images.pexels.com/photos/3762408/pexels-photo-3762408.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Before">
+                    <div class="ba-handle" data-handle>
+                        <div class="ba-arrows">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                </div>
+                <p class="ba-caption">Teeth Whitening</p>
+            </div>
+            <div class="ba-item fade-up">
+                <div class="ba-slider" data-slider>
+                    <img class="ba-after" src="https://images.pexels.com/photos/4906289/pexels-photo-4906289.jpeg?auto=compress&cs=tinysrgb&w=600" alt="After">
+                    <img class="ba-before" src="https://images.pexels.com/photos/4906289/pexels-photo-4906289.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Before">
+                    <div class="ba-handle" data-handle>
+                        <div class="ba-arrows">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                </div>
+                <p class="ba-caption">Veneer Restoration</p>
+            </div>
+        </div>
+
+        <div class="gallery-strip fade-up">
+            <img src="https://images.pexels.com/photos/3763156/pexels-photo-3763156.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Smile">
+            <img src="https://images.pexels.com/photos/3779706/pexels-photo-3779706.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Dental care">
+            <img src="https://images.pexels.com/photos/8095656/pexels-photo-8095656.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Happy smile">
+            <img src="https://images.pexels.com/photos/3845735/pexels-photo-3845735.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Dental treatment">
+            <img src="https://images.pexels.com/photos/14796031/pexels-photo-14796031.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Bright teeth">
+        </div>
+    </div>
+</section>
+
+<!-- ===== APPROACH / PHILOSOPHY ===== -->
+<section class="section approach">
+    <div class="sep"></div>
+    <div class="section-inner">
+        <p class="sec-label fade-up">Clinical Approach</p>
+        <h2 class="sec-title fade-up">Philosophy & Values</h2>
+        <p class="sec-sub fade-up">A patient-centered approach rooted in evidence-based aesthetics</p>
+
+        <div class="approach-layout">
+            <div class="fade-left">
+                <p class="approach-quote">Every smile is unique. My approach centres on precision, natural aesthetics, and preserving what nature gave you &mdash; enhancing it with artistry and modern science to create results that are balanced, beautiful, and truly yours.</p>
+                <p class="approach-author">&mdash; Dr. Riya Kandge-Khedkar</p>
+            </div>
+            <div class="approach-pillars fade-right">
+                <div class="pillar">
+                    <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                    <h4>Precision</h4>
+                    <p>Meticulous evaluation and treatment planning for predictable results</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h4>Preservation</h4>
+                    <p>Minimally invasive techniques that protect natural tooth structure</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+                    <h4>Natural Aesthetics</h4>
+                    <p>Results in harmony with individual facial features and personality</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                    <h4>Digital First</h4>
+                    <p>Preview your transformation before any treatment begins</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact" id="contact">
+    <div class="sep"></div>
+    <div class="section-inner">
+        <p class="sec-label fade-up">Connect</p>
+        <h2 class="sec-title fade-up">Let's Talk Smiles</h2>
+        <p class="sec-sub fade-up">Open for professional discussions, collaborations, and consultations</p>
+
+        <div class="contact-layout">
+            <div class="contact-left fade-left">
+                <h3>Reach Out for <em>Professional Collaboration</em></h3>
+                <p>Whether you're a fellow dental professional, a colleague, or someone interested in aesthetic dentistry &mdash; I'd love to connect and discuss the art and science of beautiful smiles.</p>
+
+                <div class="c-item">
+                    <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+                    <div class="c-text">
+                        <h5>Phone</h5>
+                        <a href="tel:+919172861521">+91 91728 61521</a>
+                    </div>
+                </div>
+                <div class="c-item">
+                    <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+                    <div class="c-text">
+                        <h5>Email</h5>
+                        <a href="mailto:riyasmiles30@gmail.com">riyasmiles30@gmail.com</a>
+                    </div>
+                </div>
+                <div class="c-item">
+                    <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></div>
+                    <div class="c-text">
+                        <h5>Instagram</h5>
+                        <a href="https://instagram.com/riya_theaestheticdentist" target="_blank" rel="noopener">@riya_theaestheticdentist</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-right">
+                <div class="share-card">
+                    <h4>Dr. Riya Kandge-Khedkar</h4>
+                    <p>Aesthetic Dentist &bull; Pune</p>
+                    <div class="share-card-info">
+                        <div class="share-card-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>
+                            BDS, FDS &mdash; Saveetha Dental College
+                        </div>
+                        <div class="share-card-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <a href="tel:+919172861521">+91 91728 61521</a>
+                        </div>
+                        <div class="share-card-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            <a href="mailto:riyasmiles30@gmail.com">riyasmiles30@gmail.com</a>
+                        </div>
+                        <div class="share-card-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+                            <a href="https://instagram.com/riya_theaestheticdentist" target="_blank" rel="noopener">@riya_theaestheticdentist</a>
+                        </div>
+                    </div>
+                    <div class="share-card-divider"></div>
+                    <p class="share-card-location">Consultation available across Pune</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="ft-inner">
+        <p class="ft-logo">Dr. Riya Kandge-Khedkar</p>
+        <p class="ft-tag">Crafting Beautiful Smiles</p>
+        <div class="ft-social">
+            <a href="tel:+919172861521" aria-label="Phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            <a href="mailto:riyasmiles30@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></a>
+            <a href="https://instagram.com/riya_theaestheticdentist" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
+        </div>
+        <div class="ft-line"></div>
+        <p class="ft-copy">&copy; 2026 Dr. Riya Kandge-Khedkar &bull; Aesthetic Dentist &bull; Pune</p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ===== NAV =====
+const navbar = document.getElementById('navbar');
+const navMenu = document.getElementById('navMenu');
+const burgerBtn = document.getElementById('burger');
+const navAs = navMenu.querySelectorAll('a');
+
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', scrollY > 60);
+    // Active section highlight
+    const sections = document.querySelectorAll('section[id]');
+    let current = '';
+    sections.forEach(s => {
+        if (scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navAs.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+});
+
+burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('open');
+    navMenu.classList.toggle('open');
+    document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+});
+navAs.forEach(a => a.addEventListener('click', () => {
+    burgerBtn.classList.remove('open');
+    navMenu.classList.remove('open');
+    document.body.style.overflow = '';
+}));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+// ===== SCROLL ANIMATIONS =====
+const animObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+            // Stagger animations
+            setTimeout(() => e.target.classList.add('vis'), i * 80);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => animObs.observe(el));
+
+// ===== BEFORE/AFTER SLIDERS =====
+document.querySelectorAll('[data-slider]').forEach(slider => {
+    const handle = slider.querySelector('[data-handle]');
+    const before = slider.querySelector('.ba-before');
+    let dragging = false;
+
+    function setPos(clientX) {
+        const rect = slider.getBoundingClientRect();
+        let pct = ((clientX - rect.left) / rect.width) * 100;
+        pct = Math.max(3, Math.min(97, pct));
+        handle.style.left = pct + '%';
+        before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    }
+
+    slider.addEventListener('mousedown', e => { e.preventDefault(); dragging = true; setPos(e.clientX); });
+    window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+    window.addEventListener('mouseup', () => dragging = false);
+    slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend', () => dragging = false);
+});
+
+// ===== STAT COUNTER ANIMATION =====
+const statObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.counted) return;
+        el.dataset.counted = true;
+
+        const target = parseInt(el.dataset.count);
+        if (!target) return; // skip #1 text
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const start = performance.now();
+
+        function animate(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            el.textContent = Math.round(target * eased) + suffix;
+            if (progress < 1) requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-count]').forEach(el => statObs.observe(el));
+
+// ===== SPARKLES =====
+const sparkleContainer = document.getElementById('sparkleContainer');
+function spawnSparkle() {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 2 + 's';
+    s.style.animationDuration = (2 + Math.random() * 3) + 's';
+    s.style.width = s.style.height = (2 + Math.random() * 3) + 'px';
+    sparkleContainer.appendChild(s);
+    setTimeout(() => s.remove(), 5500);
+}
+setInterval(spawnSparkle, 700);
+
+// ===== PARALLAX on hero shapes =====
+window.addEventListener('scroll', () => {
+    const y = scrollY;
+    document.querySelectorAll('.hero-bg-shapes .shape').forEach((s, i) => {
+        s.style.transform = `translateY(${y * (0.1 + i * 0.05)}px)`;
+    });
+});
+</script>
+
+</body>
+</html>
