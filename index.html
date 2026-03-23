@@ -301,36 +301,7 @@
            ============================================ */
         .about { background: var(--cream); }
         .about-grid {
-            display: grid; grid-template-columns: 0.9fr 1.1fr;
-            gap: 70px; align-items: center;
-        }
-        .about-photo-wrap { position: relative; }
-        .about-photo-frame {
-            width: 100%; aspect-ratio: 3/4;
-            background: linear-gradient(145deg, var(--blush-light), var(--blush));
-            border-radius: 24px; overflow: hidden;
-            box-shadow: 0 30px 60px rgba(184, 132, 124, 0.12);
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
-        .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .about-placeholder {
-            text-align: center; color: var(--text-light); padding: 40px;
-        }
-        .about-placeholder svg { width: 80px; height: 80px; opacity: 0.3; margin-bottom: 14px; }
-        .about-placeholder p {
-            font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic;
-        }
-        .about-placeholder small { display: block; margin-top: 8px; font-size: 0.72rem; opacity: 0.5; font-style: normal; }
-        .about-decor {
-            position: absolute; bottom: -14px; right: -14px;
-            width: 100px; height: 100px; border: 1.5px solid var(--rose-light);
-            border-radius: 24px; opacity: 0.25; z-index: -1;
-        }
-        .about-decor-2 {
-            position: absolute; top: -14px; left: -14px;
-            width: 80px; height: 80px; border: 1px dashed var(--gold);
-            border-radius: 20px; opacity: 0.2; z-index: -1;
+            max-width: 800px; margin: 0 auto;
         }
 
         .about-content h3 {
@@ -745,15 +716,9 @@
             .hero-title { font-size: 2.6rem; }
             .hero-float { display: none; }
 
-            .about-grid { grid-template-columns: 1fr; gap: 45px; }
-            .about-photo-frame { max-width: 350px; margin: 0 auto; }
-
             .expertise-grid { grid-template-columns: repeat(2, 1fr); }
 
-            .ba-grid { grid-template-columns: repeat(2, 1fr); }
-            .ba-grid > .ba-item:nth-child(3) {
-                grid-column: 1 / -1; max-width: 50%; margin: 0 auto;
-            }
+            .ba-grid { grid-template-columns: repeat(3, 1fr); }
 
             .approach-layout { grid-template-columns: 1fr; gap: 45px; }
             .approach-quote { font-size: 1.6rem; }
@@ -777,13 +742,20 @@
                 flex-direction: column;
                 justify-content: center; align-items: center;
                 gap: 8px; padding: 20px;
+                z-index: 1000;
             }
             .nav-menu.open { display: flex; }
+            .nav-menu li { width: auto; text-align: center; }
             .nav-menu a {
-                color: rgba(255,255,255,0.7); font-size: 0.9rem;
-                padding: 14px 28px;
+                color: rgba(255,255,255,0.7); font-size: 0.95rem;
+                padding: 14px 32px;
+                display: inline-flex; align-items: center; gap: 10px;
+                justify-content: center;
             }
-            .nav-menu a .menu-icon { color: var(--rose-light); }
+            .nav-menu a .menu-icon {
+                color: var(--rose-light); opacity: 0.8;
+                width: 18px; height: 18px;
+            }
             .nav-menu a:hover, .nav-menu a.active { color: #fff; }
             .nav-menu a::before {
                 background: linear-gradient(135deg, rgba(184,132,124,0.2), rgba(200,168,124,0.15));
@@ -794,21 +766,19 @@
             .hero-inner { padding: 95px 24px 60px; gap: 25px; }
             .hero-title { font-size: 2rem; }
             .hero-name { font-size: 1.2rem; }
-            .hero-visual-img { max-width: 220px; }
+            .hero-visual { display: none; }
             .hero-badge { font-size: 0.7rem; padding: 6px 14px; }
 
             .section { padding: 75px 0; }
             .section-inner { padding: 0 24px; }
             .sec-title { font-size: 1.9rem; }
 
-            .about-grid { gap: 35px; }
             .edu-item { flex-direction: column; gap: 10px; text-align: center; }
 
             .expertise-grid { grid-template-columns: 1fr; }
             .exp-card { padding: 28px 22px; }
 
             .ba-grid { grid-template-columns: 1fr; gap: 28px; }
-            .ba-grid > .ba-item:nth-child(3) { max-width: 100%; }
 
             .approach-pillars { grid-template-columns: 1fr; }
             .approach-quote { font-size: 1.35rem; padding-left: 22px; }
@@ -853,7 +823,7 @@
                 </svg>
             </div>
             <div class="nav-brand">
-                <span class="first">Dr. Riya</span> <span class="last">K.</span>
+                <span class="first">Dr. Riya</span> <span class="last">Kandge-Khedkar</span>
             </div>
         </a>
         <ul class="nav-menu" id="navMenu">
@@ -943,18 +913,7 @@
         <p class="sec-sub fade-up">Where clinical precision meets artistic vision</p>
 
         <div class="about-grid">
-            <div class="about-photo-wrap fade-left">
-                <div class="about-photo-frame">
-                    <div class="about-placeholder">
-                        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="35" r="18" stroke="currentColor" stroke-width="1.5"/><path d="M20 85C20 65 35 55 50 55C65 55 80 65 80 85" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-                        <p>Dr. Riya's Photo</p>
-                        <small>Replace with professional portrait</small>
-                    </div>
-                </div>
-                <div class="about-decor"></div>
-                <div class="about-decor-2"></div>
-            </div>
-            <div class="about-content fade-right">
+            <div class="about-content fade-up">
                 <h3>Dedicated to Creating <em>Natural, Lasting</em> Smiles</h3>
                 <p>Dr. Riya Kandge-Khedkar is an Aesthetic Dentist with focused training in smile design and contemporary cosmetic dentistry. She completed her BDS and Fellowship in Aesthetic Dentistry (FDS) from Saveetha Dental College, Chennai &mdash; a NIRF-ranked No.1 private dental institution, known for advanced clinical training and research.</p>
                 <p>Her clinical approach is centered around precision, detailed evaluation, and preservation of natural tooth structure, with an emphasis on achieving balanced, natural-looking, and long-lasting aesthetic results.</p>
@@ -1190,7 +1149,7 @@
                     <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
                     <div class="c-text">
                         <h5>Phone</h5>
-                        <a href="tel:+919172861521">+91 91728 61521</a>
+                        <a href="tel:+919172861522">+91 91728 61522</a>
                     </div>
                 </div>
                 <div class="c-item">
@@ -1219,7 +1178,7 @@
                         </div>
                         <div class="share-card-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                            <a href="tel:+919172861521">+91 91728 61521</a>
+                            <a href="tel:+919172861522">+91 91728 61522</a>
                         </div>
                         <div class="share-card-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
@@ -1244,7 +1203,7 @@
         <p class="ft-logo">Dr. Riya Kandge-Khedkar</p>
         <p class="ft-tag">Crafting Beautiful Smiles</p>
         <div class="ft-social">
-            <a href="tel:+919172861521" aria-label="Phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+            <a href="tel:+919172861522" aria-label="Phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
             <a href="mailto:riyasmiles30@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></a>
             <a href="https://instagram.com/riya_theaestheticdentist" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
         </div>
